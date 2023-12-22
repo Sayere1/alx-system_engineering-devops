@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# outline and print the PID along with the process name.
+# name contain the bash word. 
+# You cannot use ps.
+
+pgrep bash -l

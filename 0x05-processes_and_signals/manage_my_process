@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # prints I am alive infinite times to /tmp/my_process
-# manage and print
 
 while true
 do

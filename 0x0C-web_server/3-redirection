@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Configure your Nginx server so that /redirect_me
+# is redirecting to another page
+# Nginx where it should be listening on port 80
+
+
+echo -e "Updating and installing Nginx.\n"
+sudo apt-get update -y -qq && \
+         sudo apt-get install nginx -y
+
+echo -e "\nSetting up some minor stuff.\n"
+sudo service nginx start
+sudo ufw allow 'Nginx HTTP'
+sudo chown -R "$USER":"$USER" /var/www/html
+sudo chmod -R 755 /var/www
+cp /var/www/html/index.nginx-debian.html /var/www/html/index.nginx-debian.html.bckp
+echo -e "Hello World!" > /var/www/html/index.nginx-debian.html
+sudo sed -i '24i\       rewrite ^/redirect_me https://www.youtube.com/ permanent;' /etc/nginx/sites-available/default
+sudo service nginx restart
+
+echo -e "\nCompleted.\n"

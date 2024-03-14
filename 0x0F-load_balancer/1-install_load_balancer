@@ -40,8 +40,8 @@ frontend abadabidi-tech-frontend
 
 backend abadabidi-tech-backend
     balance roundrobin
-    server 293203-web-01 100.26.238.25:80 check
-    server 293203-web-02 35.153.16.240:80 check
+    server 293203-web-01 3.83.253.120:80 check
+    server 293203-web-02 34.227.94.226:80 check
 "
 
 # shellcheck disable=SC2154

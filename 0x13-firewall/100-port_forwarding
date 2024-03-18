@@ -1,8 +1,8 @@
 #
 # rules.before
 #
-# Rules that should run before the ufw command line added rules
-# Add rules to one of these chains:
+# Rules that should be run before the ufw command line added rules. Custom
+# rules should be added to one of these chains:
 #   ufw-before-input
 #   ufw-before-output
 #   ufw-before-forward
@@ -13,7 +13,7 @@
 -A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
 COMMIT
 
-# Do not delete these required lines, otw errors
+# Don't delete these required lines, otherwise there will be errors
 *filter
 :ufw-before-input - [0:0]
 :ufw-before-output - [0:0]
@@ -21,11 +21,12 @@ COMMIT
 :ufw-not-local - [0:0]
 # End required lines
 
+
 # allow all on loopback
 -A ufw-before-input -i lo -j ACCEPT
 -A ufw-before-output -o lo -j ACCEPT
 
-# process packets for which we already have a connection
+# quickly process packets for which we already have a connection
 -A ufw-before-input -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 -A ufw-before-output -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 -A ufw-before-forward -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
@@ -75,5 +76,5 @@ COMMIT
 # is uncommented)
 -A ufw-before-input -p udp -d 239.255.255.250 --dport 1900 -j ACCEPT
 
-# do not  delete the 'COMMIT' line or these rules won't be processed
+# don't delete the 'COMMIT' line or these rules won't be processed
 COMMIT

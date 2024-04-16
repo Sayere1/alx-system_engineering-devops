@@ -1,0 +1,11 @@
+# allow server to make 2000 request, 200 request at a time without error.
+
+exec {'replace':
+  provider => shell,
+  command  => 'sudo sed -i "s/ULIMIT=\"-n 15\"/ULIMIT=\"-n 4096\"/" /etc/default/nginx',
+  before   => Exec['restart'],
+}
+
+exec {'restart':
+  provider => shell, command  => 'sudo service nginx restart',
+}
